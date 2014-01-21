@@ -7,7 +7,7 @@ $config['salt'] = '78563978347571';
 $config['encryption_method'] = 'sha1';
 
 // ACL enabled
-$config['acl_enabled'] = true;
+$config['acl_enabled'] = false;
 
 // Allowed URLs for all users
 $config['allowed_urls'] = array(

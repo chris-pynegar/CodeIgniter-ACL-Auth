@@ -70,11 +70,11 @@ class ACL_Auth {
 			}
 		}
 
+		// Set the current route
+		$this->current_route();
+
 		// Check to see if ACL is enabled
 		if($this->acl_enabled = $this->config['acl_enabled']) {
-			// Set the current route
-			$this->current_route();
-
 			// If ACL is enabled check that the user has access to the current url
 			if(!$this->has_access()) {
 				// Show 404 if access is denied
