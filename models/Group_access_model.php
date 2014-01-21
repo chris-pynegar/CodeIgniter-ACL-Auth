@@ -2,6 +2,12 @@
 
 /**
  * Group Access model
+ *
+ * Required database fields for ACL:
+ * 
+ * group_id - INT
+ * controller - VARCHAR
+ * method - VARCHAR
  */
 class Group_access_model extends CI_Model {
 
