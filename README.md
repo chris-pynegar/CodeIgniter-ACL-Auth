@@ -1,4 +1,4 @@
-CodeIgniter-ACL-Auth
-====================
+ACL Authentication for CodeIgniter 3
+====================================
 
-ACL Authentication Library for CodeIgniter 3
+Documentation coming soon.
