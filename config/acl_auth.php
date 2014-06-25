@@ -1,50 +1,97 @@
 <?php
 
-// Security salt
+/**
+ * The security salt to add to your passwords, 
+ * this string should contain numeric characters only and is required.
+ */
 $config['salt'] = '78563978347571';
 
-// Encryption method e.g. sha1, md5
+/**
+ * The algorithm to use when encrypting your passwords.
+ */
 $config['encryption_method'] = 'sha256';
 
-// ACL enabled
+/**
+ * Wether or not you are using full ACL functionality or standard auth.
+ */
 $config['acl_enabled'] = false;
 
-// Allowed URLs for all users
+/**
+ * URLs that can be accessed without logged in, the array for this 
+ * format must be formatted like this:
+ *
+ * 'controller1' => array('method1', 'method2'),
+ * 'controller2' => array('method2')
+ */
 $config['allowed_urls'] = array(
 	'account' => array(
 		'login'
 	)
 );
 
-// Allowed CLI URLs
+/**
+ * URLs that can bypass the login redirect when accessed through the
+ * Command Line Interface (CLI) and are formatted the same way as the 
+ * allowed_urls option.
+ */
 $config['allowed_cli_urls'] = array();
 
-// Session keys
+/**
+ * The names of the session keys that will be used by the ACL Auth library.
+ */
 $config['session_keys'] = array(
-	// The session that will store the user
+	/**
+	 * This session stores the logged in user details.
+	 */
 	'user' => 'acl_auth_user',
-	// The session that stores the last viewed page
+	/**
+	 * This session stores the page that forwarded us to the login,
+	 * it is important for us to remember this so we can return the
+	 * user back here on a successful login.
+	 */
 	'last_page' => 'acl_auth_last_page'
 );
 
-// URLs for redirects
+/**
+ * These are the urls to go to during certain events of the Authentication process.
+ */
 $config['url'] = array(
-	// URL to go to when the user logs in
+	/**
+	 * When the user successfully logs in, if we don't have a last 
+	 * page stored we must send them to this default page.
+	 */
 	'on_login' => 'account',
-	// URL to go to when user logs out
+	/**
+	 * This is the page the user will be redirected to when they have logged out.
+	 */
 	'on_logout' => 'account/login',
-	// The login page
+	/**
+	 * This is the login page, should the user attempt to access a restricted
+	 * page they will be asked to log in before they can proceed any further.
+	 */
 	'to_login' => 'account/login'
 );
 
-// Models for tables
+/**
+ * These are the names of the models that each table will use, we offer this 
+ * configuration to give you more flexibilty when implementing ACL Auth 
+ * into existing applications.
+ */
 $config['models'] = array(
-	// Model for the grop_access table
+	/**
+	 * The model used for handling the routes a group can access.
+	 */
 	'group_access' => 'group_access_model',
-	// Model for the groups table
+	/**
+	 * The model used for handling the groups.
+	 */
 	'groups' => 'groups_model',
-	// Model for the user_groups table
+	/**
+	 * The model used for handling the user groups.
+	 */
 	'user_groups' => 'user_groups_model',
-	// Model for the users table
+	/**
+	 * The model used for handling the users
+	 */
 	'users' => 'users_model',
 );
