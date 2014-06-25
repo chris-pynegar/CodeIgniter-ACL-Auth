@@ -182,7 +182,12 @@ class ACL_Auth {
 	 * @return string
 	 */
 	public function encrypt_password($password) {
-		return call_user_func($this->config['encryption_method'], $password . $this->config['salt']);
+		// Check that we have a valid algorithm set
+		if(!in_array($this->config['encryption_method'], hash_algos())) {
+			show_error('ACL Auth: Invalid encryption method set.');
+		}
+		
+		return hash($this->config['encryption_method'], $password.$this->config['salt']);
 	}
 
 	/**

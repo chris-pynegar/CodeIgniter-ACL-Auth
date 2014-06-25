@@ -4,7 +4,7 @@
 $config['salt'] = '78563978347571';
 
 // Encryption method e.g. sha1, md5
-$config['encryption_method'] = 'sha1';
+$config['encryption_method'] = 'sha256';
 
 // ACL enabled
 $config['acl_enabled'] = false;
