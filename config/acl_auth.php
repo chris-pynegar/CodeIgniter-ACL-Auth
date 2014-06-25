@@ -4,7 +4,7 @@
  * The security salt to add to your passwords, 
  * this string should contain numeric characters only and is required.
  */
-$config['salt'] = '78563978347571';
+$config['salt'] = '';
 
 /**
  * The algorithm to use when encrypting your passwords.

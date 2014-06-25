@@ -56,6 +56,11 @@ class ACL_Auth {
 		$this->ci->load->config('acl_auth', true);
 		$this->config = $this->ci->config->config['acl_auth'];
 
+		// Check that we have a security salt set
+		if((string)$this->config['salt'] === '') {
+			show_error('ACL Auth: You must set your "salt" option.');
+		}
+
 		// Load dependencies
 		$this->load_dependencies();
 
