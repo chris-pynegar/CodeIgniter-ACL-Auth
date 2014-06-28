@@ -94,6 +94,9 @@ class ACL_Auth {
 	 * @return void
 	 */
 	private function load_dependencies() {
+		// Load required drivers
+		$this->ci->load->driver('session');
+
 		// Load required helpers
 		$this->ci->load->helper('url');
 
