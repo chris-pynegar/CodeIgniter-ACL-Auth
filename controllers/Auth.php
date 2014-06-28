@@ -16,7 +16,19 @@ class Auth extends CI_Controller {
 		$this->load->helper('form');
 	}
 
+	public function index() {
+		// We must be logged in to view this page
+		$this->acl_auth->request();
+
+		$this->load->view('auth/index.php', $this->viewdata);
+	}
+
 	public function login() {
+		// No need to load this page if we are logged in
+		if($this->acl_auth->logged_in()) {
+			redirect('auth');
+		}
+
 		if($this->input->post()) {
 			$this->form_validation->set_rules('username', 'Username', 'required');
 			$this->form_validation->set_rules('password', 'Password', 'required');
@@ -27,7 +39,7 @@ class Auth extends CI_Controller {
 
 				// Show an error if the login fails
 				if(!$login) {
-
+					$this->viewdata['error'] = 'Invalid username/password.';
 				}
 			}
 		}

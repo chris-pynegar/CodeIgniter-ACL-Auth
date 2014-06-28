@@ -9,6 +9,10 @@
 
 	<?php echo validation_errors(); ?>
 
+	<?php if (isset($error)): ?>
+		<p><?php echo $error; ?></p>
+	<?php endif ?>
+
 	<?php echo form_open('auth/login'); ?>
 		<?php echo form_label('Username', 'username'); ?>
 		<?php echo form_input(array(
