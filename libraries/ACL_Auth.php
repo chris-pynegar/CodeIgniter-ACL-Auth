@@ -258,6 +258,15 @@ class ACL_Auth {
 	}
 
 	/**
+	 * Return true if we have ACL enabled
+	 *
+	 * @return bool
+	 */
+	public function acl_enabled() {
+		return $this->acl_enabled;
+	}
+
+	/**
 	 * Gets the current route
 	 *
 	 * @return object
