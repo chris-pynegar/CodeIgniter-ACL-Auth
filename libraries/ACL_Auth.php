@@ -100,8 +100,14 @@ class ACL_Auth {
 		// Load required helpers
 		$this->ci->load->helper('url');
 
+		// Find the models to load
+		$models = array();
+		foreach(array_values($this->config['models']) as $model) {
+			array_push($models, $model['class']);
+		}
+
 		// Load require models
-		$this->ci->load->model(array_values($this->config['models']));
+		$this->ci->load->model($models);
 	}
 
 	/**
@@ -114,7 +120,12 @@ class ACL_Auth {
 	 */
 	private function call_model($model, $method, array $params = array()) {
 		// Get correct model name
-		$model = $this->config['models'][$model];
+		$model = $this->config['models'][$model]['class'];
+
+		// Check to see if we have a method override in the models config
+		if(isset($method_override = $this->config['models'][$model]['class'][$method])) {
+			$method = $method_override;
+		}
 
 		return call_user_func_array(array($this->ci->$model, $method), $params);
 	}

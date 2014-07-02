@@ -73,25 +73,88 @@ $config['url'] = array(
 );
 
 /**
- * These are the names of the models that each table will use, we offer this 
+ * These are the names of the models and the required methods that each table will use, we offer this 
  * configuration to give you more flexibilty when implementing ACL Auth 
  * into existing applications.
+ *
+ * Changing the method names:
+ *
+ * To update the method name for a particular function do something similar to this 
+ * for the model you wish to update:
+ *
+ * 'method_reference' => 'your_method_name'
  */
 $config['models'] = array(
 	/**
 	 * The model used for handling the routes a group can access.
 	 */
-	'group_access' => 'group_access_model',
+	'group_access' => array(
+		/**
+		 * The name of the group access model
+		 */
+		'class' => 'group_access_model',
+		/**
+		 * Required group_access_model methods
+		 */
+		'methods' => array(
+			/**
+			 * Checks if the user has access to a particular action
+			 *
+			 * @param stirng $controller The controller the user is trying to access
+			 * @param string $method The method the user is trying to access
+			 * @param int $user_id The users ID
+			 * @return bool Wether or not the user has access
+			 */
+			'user_has_access' => 'user_has_access'
+		)
+	),
 	/**
 	 * The model used for handling the groups.
 	 */
-	'groups' => 'groups_model',
+	'groups' => array(
+		/**
+		 * The name of the groups model
+		 */
+		'class' => 'groups_model'
+	),
 	/**
 	 * The model used for handling the user groups.
 	 */
-	'user_groups' => 'user_groups_model',
+	'user_groups' => array(
+		/**
+		 * The name of the user groups model
+		 */
+		'class' => 'user_groups_model'
+	),
 	/**
 	 * The model used for handling the users
 	 */
-	'users' => 'users_model',
+	'users' => array(
+		/**
+		 * The name of the users model
+		 */
+		'class' => 'users_model',
+		/**
+		 * Required users_model methods
+		 */
+		'methods' =. array(
+			/**
+			 * Find the user by their id, this is to retrieve the logged in user upon
+			 * a page request within the application.
+			 *
+			 * @param int $id The users ID
+			 * @return object The found user, if no user is found then return null
+			 */
+			'find_by_id' => 'find_by_id',
+			/**
+			 * Find the user that has requested a login, this only passes the users username
+			 * and their encrypted password.
+			 *
+			 * @param string $username The users username
+			 * @param string $password The users encrypted password
+			 * @return object The user found, if no user is found then return null
+			 */
+			'find_user' => 'find_user'
+		)
+	),
 );
