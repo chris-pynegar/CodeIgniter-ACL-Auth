@@ -60,16 +60,16 @@ $config['url'] = array(
 	 * When the user successfully logs in, if we don't have a last 
 	 * page stored we must send them to this default page.
 	 */
-	'on_login' => 'account',
+	'on_login' => 'auth',
 	/**
 	 * This is the page the user will be redirected to when they have logged out.
 	 */
-	'on_logout' => 'account/login',
+	'on_logout' => 'auth/login',
 	/**
 	 * This is the login page, should the user attempt to access a restricted
 	 * page they will be asked to log in before they can proceed any further.
 	 */
-	'to_login' => 'account/login'
+	'to_login' => 'auth/login'
 );
 
 /**
